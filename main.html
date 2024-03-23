@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic 8 Ball</title>
+<style>
+    body {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        text-align: center;
+        background-color: #f0f0f0;
+    }
+    #magic-ball {
+        width: 200px;
+        height: 200px;
+        margin: 50px auto;
+        background-image: url('https://cdn.pixabay.com/photo/2013/07/13/10/51/billiard-157924_1280.png');
+        background-size: cover;
+        position: relative;
+        cursor: pointer;
+    }
+    #answer {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    /* Define the exaggerated shake animation */
+    @keyframes shake {
+        0% { transform: rotate(-10deg); }
+        25% { transform: rotate(20deg); }
+        50% { transform: rotate(-20deg); }
+        75% { transform: rotate(20deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    .shaking {
+        animation: shake 0.8s ease;
+    }
+
+    /* Full screen overlay */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Image container */
+    .overlay img {
+        max-width: 90%;
+        max-height: 90%;
+        animation: fadeOut 1s ease forwards;
+    }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div id="magic-ball" onclick="shakeMagic8Ball()"></div>
+<div id="answer"></div>
+<div class="overlay" id="overlay"></div>
+
+<script>
+var shakeCount = 0;
+
+function shakeMagic8Ball() {
+    var magicBall = document.getElementById("magic-ball");
+    magicBall.classList.add("shaking");
+
+    shakeCount++;
+
+    if (shakeCount % 5 === 0) {
+        showRandomImage();
+    }
+
+    setTimeout(function() {
+        magicBall.classList.remove("shaking");
+        showAnswer();
+    }, 800);
+}
+
+function showAnswer() {
+    var answers = [
+        "It is certain.",
+        "It is decidedly so.",
+        "Without a doubt.",
+        "Yes - definitely.",
+        "You may rely on it.",
+        "As I see it, yes.",
+        "Most likely.",
+        "Outlook good.",
+        "Yes.",
+        "Signs point to yes.",
+        "Reply hazy, try again.",
+        "Ask again later.",
+        "Better not tell you now.",
+        "Cannot predict now.",
+        "Concentrate and ask again.",
+        "Don't count on it.",
+        "My reply is no.",
+        "My sources say no.",
+        "Outlook not so good.",
+        "Very doubtful."
+    ];
+
+    var randomIndex = Math.floor(Math.random() * answers.length);
+    var randomAnswer = answers[randomIndex];
+
+    document.getElementById("answer").textContent = randomAnswer;
+}
+
+function showRandomImage() {
+    var images = [
+        "https://static.wikia.nocookie.net/meme/images/2/28/Stressed_Emoji.png/revision/latest?cb=20210814093341",
+        "https://1000logos.net/wp-content/uploads/2023/10/Fuckboy-Face-Emoji.png",
+        "https://www.pngmart.com/files/23/Cursed-Emoji-Love-PNG-Pic.png",
+        "https://tiermaker.com/images/chart/chart/cursed-emoji-606468/emotepng.png",
+        "https://static1.anpoimages.com/wordpress/wp-content/uploads/2021/01/02/gboard-emoji-kitchen-dupe-adorable-3.png"
+    ];
+
+    var randomIndex = Math.floor(Math.random() * images.length);
+    var randomImage = images[randomIndex];
+
+    var overlay = document.getElementById("overlay");
+    overlay.innerHTML = '<img src="' + randomImage + '" alt="Random Image">';
+    overlay.style.display = "flex";
+
+    setTimeout(function() {
+        overlay.style.display = "none";
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
