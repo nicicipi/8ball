@@ -12,7 +12,8 @@ const responses = [
     "Big doubt",
     "Cannot predict now",
     "Oonga",
-    "Most likely"
+    "Most likely",
+    "I love you"
 ];
 
 // Elements
