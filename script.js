@@ -13,7 +13,6 @@ const responses = [
     "Cannot predict now",
     "Oonga",
     "Most likely",
-    "I love you"
 ];
 
 // Elements
